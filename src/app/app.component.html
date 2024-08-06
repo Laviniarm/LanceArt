@@ -1,15 +1,43 @@
+
 <div style="text-align:center">
   <h1>Galeria de Arte</h1>
 </div>
-<app-art-list
-  [artes]="artes"
-  (editarArte)="editarArte($event)"
-  (deleteArte)="deleteArte($event)">
-</app-art-list>
-<app-art-form
-  [artes]="artes"
-  [arte]="arteAtual"
-  [edicao]="edicao"
-  (arteSalva)="salvarArte($event)"
-  (artePostada)="LimparArte()">
-</app-art-form>
+
+<h2>{{ edicao ? 'Editar Arte' : 'Adicionar Arte' }}</h2>
+<form (ngSubmit)="salvarArte()">
+  <mat-form-field >
+    <mat-label>Titulo</mat-label>
+    <input matInput [(ngModel)]="arteAtual.titulo" name="titulo" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Artista</mat-label>
+    <input matInput [(ngModel)]="arteAtual.artista" name="artista" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ano</mat-label>
+    <input matInput type="number" [(ngModel)]="arteAtual.ano" name="ano" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Salvar</button>
+</form>
+
+<h2>Lista de Artes</h2>
+<div style="display: flex; flex-wrap: wrap;">
+  <div *ngFor="let arte of artes" style="margin: 10px;">
+    <mat-card>
+      <mat-card-title>{{ arte.titulo }}</mat-card-title>
+      <mat-card-content>
+        <p>Artista: {{ arte.artista }}</p>
+        <p>Ano: {{ arte.ano }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-icon>delete</mat-icon>
+        <button mat-button color="primary" (click)="deleteArte(arte.id)">Deletar</button>
+        <mat-icon color="primary" >edit</mat-icon>
+        <button mat-button color="primary" (click)="editarArte(arte)">Editar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -8,23 +8,23 @@ import { Component } from '@angular/core';
 export class AppComponent {
   artes = [
     { id: 1, titulo: 'O Eco do Vento', artista: 'Luca Dante', ano: 1985 },
-    { id: 2, titulo: 'A Dança das Estrelas', artista: 'Mia Leclerc', ano: 1892 }
+    { id: 2, titulo: 'A Dança das Estrelas', artista: 'Mia Rodrigues', ano: 1892 }
   ];
 
   arteAtual = { id: 0, titulo: '', artista: '', ano: 0 };
   edicao = false;
 
-  salvarArte(arte: any) {
+  salvarArte() {
     if (this.edicao) {
-      const index = this.artes.findIndex(a => a.id === arte.id);
+      const index = this.artes.findIndex(a => a.id === this.arteAtual.id);
       if (index !== -1) {
-        this.artes[index] = { ...arte };
+        this.artes[index] = { ...this.arteAtual };
       }
     } else {
-      arte.id = this.artes.length + 1;
-      this.artes.push({ ...arte });
+      this.arteAtual.id = this.artes.length + 1;
+      this.artes.push({ ...this.arteAtual });
     }
-    this.LimparArte();
+    this.limparArte();
   }
 
   editarArte(arte: any) {
@@ -36,7 +36,7 @@ export class AppComponent {
     this.artes = this.artes.filter(art => art.id !== id);
   }
 
- LimparArte() {
+  limparArte() {
     this.arteAtual = { id: 0, titulo: '', artista: '', ano: 0 };
     this.edicao = false;
   }
