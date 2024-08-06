@@ -1,0 +1,16 @@
+<h2>Lista de Artes</h2>
+<div *ngFor="let arte of artes">
+  <mat-card >
+    <mat-card-title>{{ arte.titulo }}</mat-card-title>
+    <mat-card-content>
+      <p>Artist: {{ arte.artista }}</p>
+      <p>Year: {{ arte.ano}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="deletarArte(arte.id)">Deletar</button>
+      <mat-icon>delete</mat-icon>
+      <button mat-button color="primary"  (click)="editaArte(arte)">Editar</button>
+      <mat-icon color="primary" >edit</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+</div>
